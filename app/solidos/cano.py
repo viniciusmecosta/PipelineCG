@@ -83,7 +83,15 @@ def gerar_cano(raio, espessura, p0, p1, t0, t1, segmentos, fatias):
     raio_int = raio - espessura
     vertices = []
     faces = []
+
+    direcao = p1 - p0
+    norma_dir = np.linalg.norm(direcao)
     up = np.array([0.0, 1.0, 0.0])
+
+    if norma_dir > 1e-6:
+        direcao_norm = direcao / norma_dir
+        if abs(direcao_norm[1]) > 0.9:
+            up = np.array([0.0, 0.0, 1.0])
 
     for i in range(segmentos):
         normal, binormal = calcular_frame(curva, i, up)[1:]
