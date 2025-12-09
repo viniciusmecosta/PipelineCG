@@ -24,7 +24,27 @@ def visualizar_malha(vertices, faces, titulo, cor):
     ax.set_xlim(min_lim, max_lim)
     ax.set_ylim(min_lim, max_lim)
     ax.set_zlim(min_lim, max_lim)
+
     plt.show()
+
+
+def ajustar_limites_com_pontos(ax, vertices, pontos_extras=[]):
+    if pontos_extras:
+        todos_pontos = np.vstack([vertices] + pontos_extras)
+    else:
+        todos_pontos = vertices
+
+    min_vals = np.min(todos_pontos, axis=0)
+    max_vals = np.max(todos_pontos, axis=0)
+
+    max_range = (max_vals - min_vals).max() / 2.0
+    mid_vals = (max_vals + min_vals) / 2.0
+
+    max_range *= 1.1
+
+    ax.set_xlim(mid_vals[0] - max_range, mid_vals[0] + max_range)
+    ax.set_ylim(mid_vals[1] - max_range, mid_vals[1] + max_range)
+    ax.set_zlim(mid_vals[2] - max_range, mid_vals[2] + max_range)
 
 
 def plotar_cena(vertices, faces, cores):
@@ -37,14 +57,12 @@ def plotar_cena(vertices, faces, cores):
     mesh = Poly3DCollection(poly3d)
     mesh.set_facecolor(cores)
     mesh.set_edgecolor('black')
-    mesh.set_linewidth(0)
+    mesh.set_linewidth(0.07)
     mesh.set_alpha(0.9)
     ax.add_collection3d(mesh)
     ax.set_xlabel('Eixo X')
     ax.set_ylabel('Eixo Y')
     ax.set_zlabel('Eixo Z')
     ax.set_title('Questao 2')
-    ax.set_xlim(-8, 8)
-    ax.set_ylim(-8, 8)
-    ax.set_zlim(-8, 8)
+    ajustar_limites_com_pontos(ax, vertices)
     plt.show()
