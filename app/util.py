@@ -66,3 +66,56 @@ def plotar_cena(vertices, faces, cores):
     ax.set_title('Questao 2')
     ajustar_limites_com_pontos(ax, vertices)
     plt.show()
+
+
+def plotar_comparacao_camera(vertices_mundo, vertices_camera, faces, cores, eye, target, origem_mundo_camera,
+                             target_camera):
+    fig = plt.figure(figsize=(14, 7))
+
+    ax1 = fig.add_subplot(121, projection='3d')
+    poly3d_mundo = [vertices_mundo[face] for face in faces]
+    mesh_mundo = Poly3DCollection(poly3d_mundo)
+    mesh_mundo.set_facecolor(cores)
+    mesh_mundo.set_edgecolor('black')
+    mesh_mundo.set_linewidth(0.05)
+    mesh_mundo.set_alpha(0.9)
+    ax1.add_collection3d(mesh_mundo)
+
+    ax1.scatter(eye[0], eye[1], eye[2], color='blue', marker='^', s=80, label='Camera (Eye)')
+    ax1.scatter(target[0], target[1], target[2], color='green', marker='x', s=80, label='Mira (At)')
+
+    origem_mundo = np.array([0.0, 0.0, 0.0])
+    ax1.scatter(origem_mundo[0], origem_mundo[1], origem_mundo[2], color='red', marker='o', s=40,
+                label='Origem (0,0,0)')
+
+    ax1.set_title('Mundo')
+    ax1.set_xlabel('X')
+    ax1.set_ylabel('Y')
+    ax1.set_zlabel('Z')
+    ax1.legend()
+    ajustar_limites_com_pontos(ax1, vertices_mundo, [eye, target, origem_mundo])
+
+    ax2 = fig.add_subplot(122, projection='3d')
+    poly3d_camera = [vertices_camera[face] for face in faces]
+    mesh_camera = Poly3DCollection(poly3d_camera)
+    mesh_camera.set_facecolor(cores)
+    mesh_camera.set_edgecolor('black')
+    mesh_camera.set_linewidth(0.05)
+    mesh_camera.set_alpha(0.9)
+    ax2.add_collection3d(mesh_camera)
+
+    posicao_camera_local = np.array([0.0, 0.0, 0.0])
+
+    ax2.scatter(posicao_camera_local[0], posicao_camera_local[1], posicao_camera_local[2], color='blue', marker='^',
+                s=80, label='Camera (0,0,0)')
+    ax2.scatter(target_camera[0], target_camera[1], target_camera[2], color='green', marker='x', s=80,
+                label='Mira (At)')
+    ax2.scatter(origem_mundo_camera[0], origem_mundo_camera[1], origem_mundo_camera[2], color='red', marker='o', s=40,
+                label='Origem Mundo')
+
+    ax2.set_title('Camera')
+    ax2.set_xlabel('U')
+    ax2.set_ylabel('V')
+    ax2.set_zlabel('N')
+    ax2.legend()
+    ajustar_limites_com_pontos(ax2, vertices_camera, [origem_mundo_camera, posicao_camera_local, target_camera])
