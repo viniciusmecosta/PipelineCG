@@ -17,7 +17,7 @@ def aplicar_matriz(vertices, matriz):
     novos_vertices = np.zeros_like(vertices)
     for i in range(len(vertices)):
         ponto = np.array([vertices[i, 0], vertices[i, 1], vertices[i, 2], 1.0])
-        ponto_transformado = np.matmul(matriz, ponto)
+        ponto_transformado = matriz @ ponto
         novos_vertices[i, 0] = ponto_transformado[0]
         novos_vertices[i, 1] = ponto_transformado[1]
         novos_vertices[i, 2] = ponto_transformado[2]
@@ -33,7 +33,7 @@ def compor_cena():
     m_esc_cubo = obter_matriz_escala(3.0, 3.0, 3.0)
     m_rot_cubo = obter_matriz_rotacao_y(45)
     m_trans_cubo = obter_matriz_translacao(-4.0, -4.0, 0.0)
-    m_final_cubo = np.matmul(m_trans_cubo, np.matmul(m_rot_cubo, m_esc_cubo))
+    m_final_cubo = m_trans_cubo @ m_rot_cubo @ m_esc_cubo
     v_cubo = aplicar_matriz(v_cubo, m_final_cubo)
     centro_cubo = np.mean(v_cubo, axis=0)
 
@@ -52,7 +52,7 @@ def compor_cena():
     m_rot_toro = obter_matriz_rotacao_x(60)
     m_trans_toro = obter_matriz_translacao(4.0, 4.0, 0.0)
 
-    m_final_toro = np.matmul(m_trans_toro, np.matmul(m_rot_toro, m_esc_toro))
+    m_final_toro = m_trans_toro @ m_rot_toro @ m_esc_toro
     v_toro = aplicar_matriz(v_toro, m_final_toro)
     centro_toro = np.mean(v_toro, axis=0)
 
@@ -73,7 +73,7 @@ def compor_cena():
     m_esc_cano = obter_matriz_escala(1.2, 1.2, 1.2)
     m_rot_cano = obter_matriz_rotacao_z(90)
     m_trans_cano = obter_matriz_translacao(0.0, 0.0, 4.0)
-    m_final_cano = np.matmul(m_trans_cano, np.matmul(m_rot_cano, m_esc_cano))
+    m_final_cano = m_trans_cano @ m_rot_cano @ m_esc_cano
     v_cano = aplicar_matriz(v_cano, m_final_cano)
     centro_cano = np.mean(v_cano, axis=0)
 

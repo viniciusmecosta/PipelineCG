@@ -37,7 +37,7 @@ def obter_matriz_visualizacao(eye, target, up):
     matriz_translacao[1, 3] = -eye[1]
     matriz_translacao[2, 3] = -eye[2]
 
-    return np.matmul(matriz_rotacao, matriz_translacao)
+    return matriz_rotacao @ matriz_translacao
 
 
 if __name__ == '__main__':
@@ -52,11 +52,11 @@ if __name__ == '__main__':
     vertices_camera = aplicar_matriz(vertices_mundo, m_view)
 
     ponto_origem = np.array([0.0, 0.0, 0.0, 1.0])
-    origem_transf = np.matmul(m_view, ponto_origem)
+    origem_transf = m_view @ ponto_origem
     origem_camera = origem_transf[:3]
 
     ponto_target = np.append(target, 1.0)
-    target_transf = np.matmul(m_view, ponto_target)
+    target_transf = m_view @ ponto_target
     target_camera = target_transf[:3]
 
     plotar_comparacao_camera(vertices_mundo, vertices_camera, faces, cores, eye, target, origem_camera, target_camera)
