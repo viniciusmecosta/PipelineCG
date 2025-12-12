@@ -47,7 +47,7 @@ def compor_cena():
         todas_faces.append(nova_face)
         todas_cores.append('tomato')
 
-    v_toro, f_toro = gerar_toro(2.0, 0.6, resolucao=20)
+    v_toro, f_toro = gerar_toro(2.0, 0.6, resolucao=25)
     m_esc_toro = obter_matriz_escala(1.5, 1.5, 1.5)
     m_rot_toro = obter_matriz_rotacao_x(60)
     m_trans_toro = obter_matriz_translacao(4.0, 4.0, 0.0)

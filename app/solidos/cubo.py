@@ -35,5 +35,6 @@ def gerar_cubo(tamanho, resolucao=10):
 
 if __name__ == '__main__':
     tamanho = 1
+    resolucao = 10
     v, f = gerar_cubo(tamanho)
-    visualizar_malha(v, f, '1-b) Cubo', 'tomato')
+    visualizar_malha(v, f, '1-a) Cubo', 'tomato')
