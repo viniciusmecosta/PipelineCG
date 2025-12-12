@@ -120,3 +120,4 @@ def plotar_comparacao_camera(vertices_mundo, vertices_camera, faces, cores, eye,
     ax2.set_zlabel('N')
     ax2.legend()
     ajustar_limites_com_pontos(ax2, vertices_camera, [origem_mundo_camera, posicao_camera_local, target_camera])
+    plt.show()
