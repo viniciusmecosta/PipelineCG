@@ -30,7 +30,8 @@ def visualizar_malha(vertices, faces, titulo, cor):
 
 def ajustar_limites_com_pontos(ax, vertices, pontos_extras=[]):
     if pontos_extras:
-        todos_pontos = np.vstack([vertices] + pontos_extras)
+        extras_formatados = [np.array(p).reshape(1, 3) for p in pontos_extras]
+        todos_pontos = np.vstack([vertices] + extras_formatados)
     else:
         todos_pontos = vertices
 

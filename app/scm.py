@@ -66,9 +66,9 @@ def compor_cena():
 
     p0 = np.array([0.0, -2.0, 0.0])
     p1 = np.array([0.0, 2.0, 0.0])
-    t0 = np.array([3.0, 0.0, 0.0])
-    t1 = np.array([-3.0, 0.0, 0.0])
-    v_cano, f_cano = gerar_cano(1.0, 0.3, p0, p1, t0, t1, segmentos=20, fatias=15)
+    t0 = np.array([8.0, 0.0, 0.0])
+    t1 = np.array([-8.0, 0.0, 0.0])
+    v_cano, f_cano = gerar_cano(1.0, 0.3, p0, p1, t0, t1, segmentos=15, fatias=10)
 
     m_esc_cano = obter_matriz_escala(1.2, 1.2, 1.2)
     m_rot_cano = obter_matriz_rotacao_z(90)

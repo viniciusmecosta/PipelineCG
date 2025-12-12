@@ -109,12 +109,12 @@ def gerar_cano(raio, espessura, p0, p1, t0, t1, segmentos, fatias):
 
 
 if __name__ == '__main__':
-    p0 = np.array([0.0, 0.0, 0.0])
-    p1 = np.array([10.0, 0.0, 10.0])
-    t0 = np.array([15.0, 0.0, 0.0])
-    t1 = np.array([0.0, 15.0, 0.0])
-    raio = 3.0
-    espessura = 1.0
+    p0 = np.array([0.0, -2.0, 0.0])
+    p1 = np.array([0.0, 2.0, 0.0])
+    t0 = np.array([8.0, 0.0, 0.0])
+    t1 = np.array([-8.0, 0.0, 0.0])
+    raio = 1.0
+    espessura = 0.3
     segmentos = 15
     fatias = 10
 
