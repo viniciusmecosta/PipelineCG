@@ -1,7 +1,7 @@
 import numpy as np
 
 from app.scm import compor_cena, aplicar_matriz
-from app.util import plotar_comparacao_camera
+from app.visualizacao import plotar_comparacao_camera
 
 
 def calcular_base_camera(eye, target, up):
@@ -41,7 +41,7 @@ def obter_matriz_visualizacao(eye, target, up):
 if __name__ == '__main__':
     vertices_mundo, faces, cores, centro_cena = compor_cena()
 
-    eye = np.array([15.0, 0.0, 15.0])
+    eye = np.array([12.0, 0.0, 12.0])
     target = centro_cena
     up = np.array([0.0, 1.0, 0.0])
 

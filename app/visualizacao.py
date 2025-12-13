@@ -148,7 +148,7 @@ def plotar_projecao_2d(vertices_ndc, faces, cores, titulo="Questao 4 - Projecao 
     dados_faces.sort(key=lambda f: f['z'], reverse=True)
 
     for dado in dados_faces:
-        poly = Polygon(dado['verts'], closed=True, facecolor=dado['cor'], edgecolor='black', linewidth=0.5, alpha=0.9)
+        poly = Polygon(dado['verts'], closed=True, facecolor=dado['cor'], edgecolor='black', linewidth=0.1, alpha=0.9)
         ax.add_patch(poly)
 
     ax.set_title(titulo)
@@ -157,10 +157,27 @@ def plotar_projecao_2d(vertices_ndc, faces, cores, titulo="Questao 4 - Projecao 
     ax.set_xlim(-1.1, 1.1)
     ax.set_ylim(-1.1, 1.1)
 
-    rect = plt.Rectangle((-1, -1), 2, 2, fill=False, color='red', linestyle='--', linewidth=1.5, label='Janela de Projeção')
+    rect = plt.Rectangle((-1, -1), 2, 2, fill=False, color='red', linestyle='--', linewidth=1.5,
+                         label='Janela de Projeção')
     ax.add_patch(rect)
 
     ax.set_aspect('equal')
     ax.grid(True, linestyle='--', alpha=0.3)
     ax.legend()
+    plt.show()
+
+
+def plotar_rasterizacao(grids, resolucoes):
+    fig, axes = plt.subplots(1, len(grids), figsize=(18, 6))
+    if len(grids) == 1:
+        axes = [axes]
+
+    for i, grid in enumerate(grids):
+        res = resolucoes[i]
+        ax = axes[i]
+        ax.imshow(grid, origin='lower', interpolation='nearest')
+        ax.set_title(f'Resolução: {res[0]}x{res[1]}')
+        ax.grid(False)
+
+    plt.suptitle("5) Rasterização de Poligonos")
     plt.show()

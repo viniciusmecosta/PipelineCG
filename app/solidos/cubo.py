@@ -1,10 +1,10 @@
 import numpy as np
 from skimage import measure
 
-from app.util import visualizar_malha
+from app.visualizacao import visualizar_malha
 
 
-def calcular_sdf_cubo(tamanho, resolucao):
+def calcular_cubo(tamanho, resolucao):
     limite = tamanho / 2.0 + 1.0
     eixos = np.linspace(-limite, limite, resolucao)
     x_vals = np.zeros((resolucao, resolucao, resolucao))
@@ -26,7 +26,7 @@ def calcular_sdf_cubo(tamanho, resolucao):
 
 
 def gerar_cubo(tamanho, resolucao=10):
-    volume, limite = calcular_sdf_cubo(tamanho, resolucao)
+    volume, limite = calcular_cubo(tamanho, resolucao)
     vertices, faces, normais, valores = measure.marching_cubes(volume, level=0)
     passo = (2 * limite) / (resolucao - 1)
     vertices = vertices * passo - limite

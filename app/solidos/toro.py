@@ -1,10 +1,10 @@
 import numpy as np
 from skimage import measure
 
-from app.util import visualizar_malha
+from app.visualizacao import visualizar_malha
 
 
-def calcular_sdf_toro(raio_maior, raio_menor, resolucao):
+def calcular_toro(raio_maior, raio_menor, resolucao):
     limite = raio_maior + raio_menor + 1.0
     eixos = np.linspace(-limite, limite, resolucao)
     x_vals = np.zeros((resolucao, resolucao, resolucao))
@@ -30,7 +30,7 @@ def calcular_sdf_toro(raio_maior, raio_menor, resolucao):
 
 
 def gerar_toro(raio_maior, raio_menor, resolucao=15):
-    volume, limite = calcular_sdf_toro(raio_maior, raio_menor, resolucao)
+    volume, limite = calcular_toro(raio_maior, raio_menor, resolucao)
     vertices, faces, normais, valores = measure.marching_cubes(volume, level=0)
     passo = (2 * limite) / (resolucao - 1)
     vertices = vertices * passo - limite

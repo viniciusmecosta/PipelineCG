@@ -10,7 +10,7 @@ from app.trans import (
     obter_matriz_rotacao_y,
     obter_matriz_rotacao_z
 )
-from app.util import plotar_cena
+from app.visualizacao import plotar_cena
 
 
 def aplicar_matriz(vertices, matriz):
@@ -28,7 +28,7 @@ def compor_cena():
     v_cubo, f_cubo = gerar_cubo(1.0, resolucao=10)
     m_esc_cubo = obter_matriz_escala(4.0, 4.0, 4.0)
     m_rot_cubo = obter_matriz_rotacao_y(45)
-    m_trans_cubo = obter_matriz_translacao(-4.0, -4.0, 0.0)
+    m_trans_cubo = obter_matriz_translacao(-5.0, -7.0, 0.0)
 
     m_final_cubo = m_trans_cubo @ m_rot_cubo @ m_esc_cubo
     v_cubo = aplicar_matriz(v_cubo, m_final_cubo)
@@ -45,7 +45,7 @@ def compor_cena():
         todas_cores.append('tomato')
 
     v_toro, f_toro = gerar_toro(2.0, 0.6, resolucao=25)
-    m_esc_toro = obter_matriz_escala(1.5, 1.5, 1.5)
+    m_esc_toro = obter_matriz_escala(1.4, 1.4, 1.4)
     m_rot_toro = obter_matriz_rotacao_x(60)
     m_trans_toro = obter_matriz_translacao(4.0, 4.0, 0.0)
 
@@ -69,7 +69,7 @@ def compor_cena():
 
     m_esc_cano = obter_matriz_escala(1.2, 1.2, 1.2)
     m_rot_cano = obter_matriz_rotacao_z(90)
-    m_trans_cano = obter_matriz_translacao(0.0, 0.0, 4.0)
+    m_trans_cano = obter_matriz_translacao(-2.0, 0.0, 4.0)
 
     m_final_cano = m_trans_cano @ m_rot_cano @ m_esc_cano
     v_cano = aplicar_matriz(v_cano, m_final_cano)

@@ -1,9 +1,9 @@
 import numpy as np
 
-from app.util import visualizar_malha
+from app.visualizacao import visualizar_malha
 
 
-def calcular_hermite(p0, p1, t0, t1, segmentos):
+def calcular_curva_hermite(p0, p1, t0, t1, segmentos):
     t = np.linspace(0, 1, segmentos)
     h00 = 2 * t ** 3 - 3 * t ** 2 + 1
     h10 = t ** 3 - 2 * t ** 2 + t
@@ -14,7 +14,7 @@ def calcular_hermite(p0, p1, t0, t1, segmentos):
     return curva
 
 
-def calcular_frame(pontos, indice, up_inicial):
+def calcular_base_local(pontos, indice, up_inicial):
     if indice < len(pontos) - 1:
         t = pontos[indice + 1] - pontos[indice]
     else:
@@ -85,7 +85,7 @@ def gerar_cano(raio, espessura, p0, p1, t0, t1, segmentos, fatias):
     if espessura >= raio:
         raise ValueError("A espessura deve ser menor que o raio.")
 
-    curva = calcular_hermite(p0, p1, t0, t1, segmentos)
+    curva = calcular_curva_hermite(p0, p1, t0, t1, segmentos)
     raio_int = raio - espessura
     vertices = []
     faces = []
@@ -97,7 +97,7 @@ def gerar_cano(raio, espessura, p0, p1, t0, t1, segmentos, fatias):
         if abs(dir_n[1]) > 0.9:
             up = np.array([0.0, 0.0, 1.0])
     for i in range(segmentos):
-        t, normal, binormal = calcular_frame(curva, i, up)
+        t, normal, binormal = calcular_base_local(curva, i, up)
         anel = gerar_anel(curva[i], normal, binormal, raio, raio_int, fatias)
         vertices.extend(anel)
     vertices = np.array(vertices)

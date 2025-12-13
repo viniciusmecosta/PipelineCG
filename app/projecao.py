@@ -3,7 +3,7 @@ import numpy as np
 from app.scc import obter_matriz_visualizacao
 from app.scm import compor_cena
 from app.trans import obter_matriz_projecao
-from app.util import plotar_projecao_2d
+from app.visualizacao import plotar_projecao_2d
 
 
 def projetar(vertices_mundo, matriz_view, matriz_projecao):
@@ -34,7 +34,7 @@ def projetar(vertices_mundo, matriz_view, matriz_projecao):
 if __name__ == '__main__':
     vertices_mundo, faces, cores, centro_cena = compor_cena()
 
-    eye = np.array([15.0, 0.0, 15.0])
+    eye = np.array([12.0, 0.0, 12.0])
     target = centro_cena
     up = np.array([0.0, 1.0, 0.0])
 
