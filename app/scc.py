@@ -9,12 +9,10 @@ def calcular_base_camera(eye, target, up):
     norma_n = np.linalg.norm(n)
     if norma_n > 0:
         n = n / norma_n
-
     u = np.cross(up, n)
     norma_u = np.linalg.norm(u)
     if norma_u > 0:
         u = u / norma_u
-
     v = np.cross(n, u)
     return u, v, n
 
@@ -43,12 +41,11 @@ def obter_matriz_visualizacao(eye, target, up):
 if __name__ == '__main__':
     vertices_mundo, faces, cores, centro_cena = compor_cena()
 
-    eye = centro_cena + np.array([15.0, 0.0, 0.0])
+    eye = np.array([15.0, 0.0, 15.0])
     target = centro_cena
     up = np.array([0.0, 1.0, 0.0])
 
     m_view = obter_matriz_visualizacao(eye, target, up)
-
     vertices_camera = aplicar_matriz(vertices_mundo, m_view)
 
     ponto_origem = np.array([0.0, 0.0, 0.0, 1.0])

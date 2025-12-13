@@ -14,14 +14,10 @@ from app.util import plotar_cena
 
 
 def aplicar_matriz(vertices, matriz):
-    novos_vertices = np.zeros_like(vertices)
-    for i in range(len(vertices)):
-        ponto = np.array([vertices[i, 0], vertices[i, 1], vertices[i, 2], 1.0])
-        ponto_transformado = matriz @ ponto
-        novos_vertices[i, 0] = ponto_transformado[0]
-        novos_vertices[i, 1] = ponto_transformado[1]
-        novos_vertices[i, 2] = ponto_transformado[2]
-    return novos_vertices
+    uns = np.ones((vertices.shape[0], 1))
+    vertices_homogeneos = np.hstack([vertices, uns])
+    novos_vertices = vertices_homogeneos @ matriz.T
+    return novos_vertices[:, :3]
 
 
 def compor_cena():
@@ -30,9 +26,10 @@ def compor_cena():
     todas_cores = []
 
     v_cubo, f_cubo = gerar_cubo(1.0, resolucao=10)
-    m_esc_cubo = obter_matriz_escala(3.0, 3.0, 3.0)
+    m_esc_cubo = obter_matriz_escala(4.0, 4.0, 4.0)
     m_rot_cubo = obter_matriz_rotacao_y(45)
     m_trans_cubo = obter_matriz_translacao(-4.0, -4.0, 0.0)
+
     m_final_cubo = m_trans_cubo @ m_rot_cubo @ m_esc_cubo
     v_cubo = aplicar_matriz(v_cubo, m_final_cubo)
     centro_cubo = np.mean(v_cubo, axis=0)
@@ -73,6 +70,7 @@ def compor_cena():
     m_esc_cano = obter_matriz_escala(1.2, 1.2, 1.2)
     m_rot_cano = obter_matriz_rotacao_z(90)
     m_trans_cano = obter_matriz_translacao(0.0, 0.0, 4.0)
+
     m_final_cano = m_trans_cano @ m_rot_cano @ m_esc_cano
     v_cano = aplicar_matriz(v_cano, m_final_cano)
     centro_cano = np.mean(v_cano, axis=0)
@@ -87,11 +85,7 @@ def compor_cena():
 
     vertices_np = np.array(todos_vertices)
 
-    max_val = 0.0
-    for i in range(len(vertices_np)):
-        for j in range(3):
-            if abs(vertices_np[i, j]) > max_val:
-                max_val = abs(vertices_np[i, j])
+    max_val = np.max(np.abs(vertices_np))
 
     centro_medio = (centro_cubo + centro_toro + centro_cano) / 3.0
 
