@@ -38,8 +38,8 @@ def gerar_toro(raio_maior, raio_menor, resolucao=15):
 
 
 if __name__ == '__main__':
-    raio_maior = 2.0
-    raio_menor = 0.6
-    resolucao = 25
+    raio_maior = 5.0
+    raio_menor = 2.0
+    resolucao = 20
     v, f = gerar_toro(raio_maior, raio_menor, resolucao)
     visualizar_malha(v, f, '1- c) Toro', 'gold')
