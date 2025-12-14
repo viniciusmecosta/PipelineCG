@@ -19,23 +19,23 @@ def calcular_base_camera(eye, target, up):
 
 def obter_matriz_visualizacao(eye, target, up):
     u, v, n = calcular_base_camera(eye, target, up)
-    matriz_rotacao = np.identity(4)
-    matriz_rotacao[0, 0] = u[0]
-    matriz_rotacao[0, 1] = u[1]
-    matriz_rotacao[0, 2] = u[2]
-    matriz_rotacao[1, 0] = v[0]
-    matriz_rotacao[1, 1] = v[1]
-    matriz_rotacao[1, 2] = v[2]
-    matriz_rotacao[2, 0] = n[0]
-    matriz_rotacao[2, 1] = n[1]
-    matriz_rotacao[2, 2] = n[2]
+    matriz_r = np.identity(4)
+    matriz_r[0, 0] = u[0]
+    matriz_r[0, 1] = u[1]
+    matriz_r[0, 2] = u[2]
+    matriz_r[1, 0] = v[0]
+    matriz_r[1, 1] = v[1]
+    matriz_r[1, 2] = v[2]
+    matriz_r[2, 0] = n[0]
+    matriz_r[2, 1] = n[1]
+    matriz_r[2, 2] = n[2]
 
-    matriz_translacao = np.identity(4)
-    matriz_translacao[0, 3] = -eye[0]
-    matriz_translacao[1, 3] = -eye[1]
-    matriz_translacao[2, 3] = -eye[2]
+    matriz_t = np.identity(4)
+    matriz_t[0, 3] = -eye[0]
+    matriz_t[1, 3] = -eye[1]
+    matriz_t[2, 3] = -eye[2]
 
-    return matriz_rotacao @ matriz_translacao
+    return matriz_r @ matriz_t
 
 
 if __name__ == '__main__':
@@ -48,12 +48,13 @@ if __name__ == '__main__':
     m_view = obter_matriz_visualizacao(eye, target, up)
     vertices_camera = aplicar_matriz(vertices_mundo, m_view)
 
-    ponto_origem = np.array([0.0, 0.0, 0.0, 1.0])
-    origem_transf = m_view @ ponto_origem
-    origem_camera = origem_transf[:3]
+    ponto_origem_mundo = np.array([0.0, 0.0, 0.0, 1.0])
+    ponto_origem_camera = m_view @ ponto_origem_mundo
+    origem_camera_coord = ponto_origem_camera[:3]
 
-    ponto_target = np.append(target, 1.0)
-    target_transf = m_view @ ponto_target
-    target_camera = target_transf[:3]
+    ponto_alvo_mundo = np.append(target, 1.0)
+    ponto_alvo_camera = m_view @ ponto_alvo_mundo
+    alvo_camera_coord = ponto_alvo_camera[:3]
 
-    plotar_comparacao_camera(vertices_mundo, vertices_camera, faces, cores, eye, target, origem_camera, target_camera)
+    plotar_comparacao_camera(vertices_mundo, vertices_camera, faces, cores, eye, target, origem_camera_coord,
+                             alvo_camera_coord)

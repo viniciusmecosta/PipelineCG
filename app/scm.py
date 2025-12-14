@@ -13,11 +13,11 @@ from app.trans import (
 from app.visualizacao import plotar_cena
 
 
-def aplicar_matriz(vertices, matriz):
-    uns = np.ones((vertices.shape[0], 1))
-    vertices_homogeneos = np.hstack([vertices, uns])
-    novos_vertices = vertices_homogeneos @ matriz.T
-    return novos_vertices[:, :3]
+def aplicar_matriz(vertices_old, matriz):
+    uns = np.ones((vertices_old.shape[0], 1))
+    vertices_homogeneos = np.hstack([vertices_old, uns])
+    vertices_new = vertices_homogeneos @ matriz.T
+    return vertices_new[:, :3]
 
 
 def compor_cena():
@@ -83,23 +83,23 @@ def compor_cena():
         todas_faces.append(nova_face)
         todas_cores.append('deepskyblue')
 
-    vertices_np = np.array(todos_vertices)
+    vertices_mundo = np.array(todos_vertices)
 
-    max_val = np.max(np.abs(vertices_np))
+    max_val = np.max(np.abs(vertices_mundo))
 
     centro_medio = (centro_cubo + centro_toro + centro_cano) / 3.0
 
     if max_val > 0:
         fator = 8.0 / max_val
         m_escala_global = obter_matriz_escala(fator, fator, fator)
-        vertices_np = aplicar_matriz(vertices_np, m_escala_global)
+        vertices_mundo = aplicar_matriz(vertices_mundo, m_escala_global)
         centro_cena = aplicar_matriz(np.array([centro_medio]), m_escala_global)[0]
     else:
         centro_cena = centro_medio
 
-    return vertices_np, todas_faces, todas_cores, centro_cena
+    return vertices_mundo, todas_faces, todas_cores, centro_cena
 
 
 if __name__ == '__main__':
-    vertices_cena, faces_cena, cores_faces, centro = compor_cena()
-    plotar_cena(vertices_cena, faces_cena, cores_faces)
+    vertices_mundo, faces_cena, cores_faces, centro = compor_cena()
+    plotar_cena(vertices_mundo, faces_cena, cores_faces)

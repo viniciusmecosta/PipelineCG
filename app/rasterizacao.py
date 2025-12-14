@@ -31,7 +31,7 @@ def transformacao_viewport(vertices_ndc, width, height):
     return vertices_tela
 
 
-def produzir_fragmento(x, y, tabela_scanline):
+def produz_fragmento(x, y, tabela_scanline):
     ym = int(y)
     xm = int(x)
 
@@ -65,12 +65,12 @@ def rasterizar_linha(x1, y1, x2, y2, tabela_scanline):
         x = x1
         y = y1
 
-        produzir_fragmento(x, y, tabela_scanline)
+        produz_fragmento(x, y, tabela_scanline)
 
         while x < x2:
             x = x + 1
             y = m * x + b
-            produzir_fragmento(x, y, tabela_scanline)
+            produz_fragmento(x, y, tabela_scanline)
 
     else:
         if y1 > y2:
@@ -89,12 +89,12 @@ def rasterizar_linha(x1, y1, x2, y2, tabela_scanline):
         y = y1
         x = x1
 
-        produzir_fragmento(x, y, tabela_scanline)
+        produz_fragmento(x, y, tabela_scanline)
 
         while y < y2:
             y = y + 1
             x = m_inv * y + b_inv
-            produzir_fragmento(x, y, tabela_scanline)
+            produz_fragmento(x, y, tabela_scanline)
 
 
 def rasterizar_triangulo(v1, v2, v3, grid, cor_rgb, width, height):
