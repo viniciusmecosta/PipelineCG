@@ -133,7 +133,7 @@ def obter_cor_rgb(nome_cor):
 def executar_rasterizacao():
     vertices_mundo, faces, cores, centro_cena = compor_cena()
 
-    eye = np.array([12.0, 0.0, 12.0])
+    eye = np.array([6.0, 0.0, 6.0])
     target = centro_cena
     up = np.array([0.0, 1.0, 0.0])
 

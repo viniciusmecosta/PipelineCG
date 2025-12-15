@@ -90,7 +90,7 @@ def compor_cena():
     centro_medio = (centro_cubo + centro_toro + centro_cano) / 3.0
 
     if max_val > 0:
-        fator = 8.0 / max_val
+        fator = 4.0 / max_val
         m_escala_global = obter_matriz_escala(fator, fator, fator)
         vertices_mundo = aplicar_matriz(vertices_mundo, m_escala_global)
         centro_cena = aplicar_matriz(np.array([centro_medio]), m_escala_global)[0]
