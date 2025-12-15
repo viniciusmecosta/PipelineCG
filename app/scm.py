@@ -26,9 +26,9 @@ def compor_cena():
     todas_cores = []
 
     v_cubo, f_cubo = gerar_cubo(1.0, resolucao=10)
-    m_esc_cubo = obter_matriz_escala(4.0, 4.0, 4.0)
+    m_esc_cubo = obter_matriz_escala(2.0, 2.0, 2.0)
     m_rot_cubo = obter_matriz_rotacao_y(45)
-    m_trans_cubo = obter_matriz_translacao(-5.0, -7.0, 0.0)
+    m_trans_cubo = obter_matriz_translacao(-2.5, -2.5, -1.0)
 
     m_final_cubo = m_trans_cubo @ m_rot_cubo @ m_esc_cubo
     v_cubo = aplicar_matriz(v_cubo, m_final_cubo)
@@ -45,9 +45,9 @@ def compor_cena():
         todas_cores.append('tomato')
 
     v_toro, f_toro = gerar_toro(2.0, 0.6, resolucao=25)
-    m_esc_toro = obter_matriz_escala(1.4, 1.4, 1.4)
+    m_esc_toro = obter_matriz_escala(0.7, 0.7, 0.7)
     m_rot_toro = obter_matriz_rotacao_x(60)
-    m_trans_toro = obter_matriz_translacao(4.0, 4.0, 0.0)
+    m_trans_toro = obter_matriz_translacao(1.5, 2.0, -1.5)
 
     m_final_toro = m_trans_toro @ m_rot_toro @ m_esc_toro
     v_toro = aplicar_matriz(v_toro, m_final_toro)
@@ -67,9 +67,9 @@ def compor_cena():
     t1 = np.array([-8.0, 0.0, 0.0])
     v_cano, f_cano = gerar_cano(1.0, 0.3, p0, p1, t0, t1, segmentos=15, fatias=10)
 
-    m_esc_cano = obter_matriz_escala(1.2, 1.2, 1.2)
+    m_esc_cano = obter_matriz_escala(0.8, 0.8, 0.8)
     m_rot_cano = obter_matriz_rotacao_z(90)
-    m_trans_cano = obter_matriz_translacao(-2.0, 0.0, 4.0)
+    m_trans_cano = obter_matriz_translacao(-1.6, 1.0, 1.5)
 
     m_final_cano = m_trans_cano @ m_rot_cano @ m_esc_cano
     v_cano = aplicar_matriz(v_cano, m_final_cano)
@@ -89,7 +89,7 @@ def compor_cena():
 
     centro_medio = (centro_cubo + centro_toro + centro_cano) / 3.0
 
-    if max_val > 0:
+    if max_val > 4.0:
         fator = 4.0 / max_val
         m_escala_global = obter_matriz_escala(fator, fator, fator)
         vertices_mundo = aplicar_matriz(vertices_mundo, m_escala_global)
