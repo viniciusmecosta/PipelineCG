@@ -49,4 +49,4 @@ if __name__ == '__main__':
 
     vertices_ndc = projetar(vertices_mundo, m_view, m_proj)
 
-    plotar_projecao_2d(vertices_ndc, faces, cores, titulo="4) Projeção Perspectiva")
+    plotar_projecao_2d(vertices_ndc, faces, cores)

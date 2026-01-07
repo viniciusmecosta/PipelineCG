@@ -127,7 +127,7 @@ def plotar_comparacao_camera(vertices_mundo, vertices_camera, faces, cores, eye,
     plt.show()
 
 
-def plotar_projecao_2d(vertices_ndc, faces, cores, titulo="Questao 4 - Projecao em Perspectiva"):
+def plotar_projecao_2d(vertices_ndc, faces, cores):
     fig = plt.figure(figsize=(10, 10))
     ax = fig.add_subplot(111)
     dados_faces = []
@@ -151,19 +151,13 @@ def plotar_projecao_2d(vertices_ndc, faces, cores, titulo="Questao 4 - Projecao 
         poly = Polygon(dado['verts'], closed=True, facecolor=dado['cor'], edgecolor='black', linewidth=0.1, alpha=0.9)
         ax.add_patch(poly)
 
-    ax.set_title(titulo)
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
-    ax.set_xlim(-1.1, 1.1)
-    ax.set_ylim(-1.1, 1.1)
-
-    rect = plt.Rectangle((-1, -1), 2, 2, fill=False, color='red', linestyle='--', linewidth=1.5,
-                         label='Janela de Projeção')
-    ax.add_patch(rect)
+    ax.set_xlim(-1.0, 1.0)
+    ax.set_ylim(-1.0, 1.0)
 
     ax.set_aspect('equal')
     ax.grid(True, linestyle='--', alpha=0.3)
-    ax.legend()
     plt.show()
 
 
