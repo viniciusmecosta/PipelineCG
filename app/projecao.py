@@ -34,7 +34,7 @@ def projetar(vertices_mundo, matriz_view, matriz_projecao):
 if __name__ == '__main__':
     vertices_mundo, faces, cores, centro_cena = compor_cena()
 
-    eye = np.array([6.0, 0.0, 6.0])
+    eye = np.array([-1.0, 1.0, 6.5])
     target = centro_cena
     up = np.array([0.0, 1.0, 0.0])
 

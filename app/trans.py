@@ -57,8 +57,8 @@ def obter_matriz_projecao(fov_graus, aspect_ratio, near, far):
     matriz = np.zeros((4, 4))
     matriz[0, 0] = f / aspect_ratio
     matriz[1, 1] = f
-    matriz[2, 2] = (far + near) / (near - far)
-    matriz[2, 3] = (2 * far * near) / (near - far)
+    matriz[2, 2] = (far + near) / (far - near)
+    matriz[2, 3] = (-2 * far * near) / (far - near)
     matriz[3, 2] = -1.0
     matriz[3, 3] = 0.0
 
